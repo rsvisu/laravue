@@ -2,6 +2,8 @@
 
 import {Link, usePage} from "@inertiajs/vue3";
 import {computed} from "vue";
+import LoginModal from "@/Pages/Auth/LoginModal.vue";
+import Modal from "@/Components/Modal.vue";
 
 const user = computed(() => usePage().props.auth.user);
 </script>
@@ -9,16 +11,27 @@ const user = computed(() => usePage().props.auth.user);
 <template>
   <div class="bg-base-100">
     <div class="navbar shadow-sm max-w-7xl mx-auto">
-      <div class="flex-1 flex flex-row items-center gap-8 mx-5">
+      <div class="flex-1 flex flex-row items-center gap-8 mx-3">
         <div>
-          <Link href="/" class="text-xl">daisyUI</Link>
+          <Link href="/" class="text-xl flex flex-row items-center gap-3" title="Inicio">
+            <!-- Icono -->
+            <svg class="w-10 h-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 11.4999H7M6 15.4999H7M17 15.4999H18M17 11.4999H18M11.5 11.4999H12.5M10 20.9999V16.9999C10 15.8954 10.8954 14.9999 12 14.9999C13.1046 14.9999 14 15.8954 14 16.9999V20.9999M17 7.49995L18.5761 7.89398C19.4428 8.11064 19.8761 8.21898 20.1988 8.46057C20.4834 8.67373 20.7061 8.95895 20.8439 9.28682C21 9.65843 21 10.1051 21 10.9984V17.7999C21 18.9201 21 19.4801 20.782 19.9079C20.5903 20.2843 20.2843 20.5902 19.908 20.782C19.4802 20.9999 18.9201 20.9999 17.8 20.9999H6.2C5.0799 20.9999 4.51984 20.9999 4.09202 20.782C3.71569 20.5902 3.40973 20.2843 3.21799 19.9079C3 19.4801 3 18.9201 3 17.7999V10.9984C3 10.1051 3 9.65843 3.15613 9.28682C3.29388 8.95895 3.51657 8.67373 3.80124 8.46057C4.12389 8.21898 4.55722 8.11064 5.42388 7.89398L7 7.49995L9.85931 4.92657C10.6159 4.2456 10.9943 3.90512 11.4221 3.77598C11.799 3.66224 12.201 3.66224 12.5779 3.77598C13.0057 3.90512 13.3841 4.2456 14.1407 4.92657L17 7.49995Z"
+                    stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <!-- Nombre -->
+            <span>|</span>
+            <span>Instituto</span>
+          </Link>
         </div>
         <div>
+          <!--
           <ul class="menu menu-horizontal px-1">
             <li>
               <Link href="#">Link</Link>
             </li>
           </ul>
+          -->
         </div>
       </div>
       <div v-if="user" class="ml-3 gap-2 flex flex-none items-center">
@@ -28,7 +41,7 @@ const user = computed(() => usePage().props.auth.user);
               <summary>{{ user.name }}</summary>
               <ul class="bg-base-100 rounded-t-none p-2">
                 <li>
-                  <Link href="/logout" method="post">Logout</Link>
+                  <Link href="/logout" method="post">Cerrar Sesión</Link>
                 </li>
               </ul>
             </details>
@@ -36,11 +49,15 @@ const user = computed(() => usePage().props.auth.user);
         </ul>
       </div>
       <div v-else class="ml-3 gap-2 flex flex-none">
-        <Link href="/login" class="btn btn-primary">Login</Link>
-        <Link href="/register" class="btn btn-secondary">Sign Up</Link>
+        <Link href="/login" class="btn btn-primary">Iniciar Sesión</Link>
+        <Link href="/register" class="btn btn-secondary">Registrate</Link>
       </div>
     </div>
   </div>
+
+  <Modal :show="openModal">
+    <LoginModal />
+  </Modal>
 </template>
 
 <style scoped>

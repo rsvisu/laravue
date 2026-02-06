@@ -4,7 +4,7 @@ import {ref} from "vue";
 const minutos = ref(0);
 const segundos = ref(0);
 const milisegundos = ref(0);
-const labelStartStop = ref("Start");
+const labelStartStop = ref("Empezar");
 const running = ref(false);
 const idInterval = ref(0);
 
@@ -30,7 +30,7 @@ const start = () => {
   // Establecemos el running a true, el texto a "start"
   // y empezamos un intervalo para incrementar el cronometro
   running.value = true;
-  labelStartStop.value = "Stop";
+  labelStartStop.value = "Parar";
   idInterval.value = setInterval(() => {
     if (milisegundos.value === 99) {
       milisegundos.value = 0;
@@ -44,7 +44,7 @@ const start = () => {
 const stop = () => {
   // Establecemos el running a falso, el texto a "stop" y limpiamos el interval
   running.value = false;
-  labelStartStop.value = "Start";
+  labelStartStop.value = "Empezar";
   clearInterval(idInterval.value);
 }
 
@@ -86,7 +86,7 @@ const format = (input) => input.toString().padStart(2, "0");
           {{ labelStartStop }}
         </button>
         <button @click="reset" class="btn btn-outline">
-          Reset
+          Reiniciar
         </button>
       </div>
     </div>
