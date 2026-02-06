@@ -6,6 +6,10 @@ import LoginModal from "@/Pages/Auth/LoginModal.vue";
 import Modal from "@/Components/Modal.vue";
 
 const user = computed(() => usePage().props.auth.user);
+
+// Modal
+const emit = defineEmits(['openLogin']);
+
 </script>
 
 <template>
@@ -49,15 +53,11 @@ const user = computed(() => usePage().props.auth.user);
         </ul>
       </div>
       <div v-else class="ml-3 gap-2 flex flex-none">
-        <Link href="/login" class="btn btn-primary">Iniciar Sesión</Link>
+        <button href="/login" class="btn btn-primary" @click="emit('openLogin')">Iniciar Sesión</button>
         <Link href="/register" class="btn btn-secondary">Registrate</Link>
       </div>
     </div>
   </div>
-
-  <Modal :show="openModal">
-    <LoginModal />
-  </Modal>
 </template>
 
 <style scoped>
