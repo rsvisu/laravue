@@ -10,13 +10,10 @@ import LoginModal from "@/Pages/Auth/LoginModal.vue";
 // Autenticacion
 const user = computed(() => usePage().props.auth.user);
 
-// Modal
-const showLogin = ref(false);
-
 </script>
 
 <template>
-  <Layout @openLogin="showLogin=true">
+  <Layout>
     <!-- Header -->
     <template #header>
       <span v-if="user">Dashboard</span>
@@ -42,8 +39,8 @@ const showLogin = ref(false);
       <!-- Hero -->
       <div class="hero-content text-center">
         <div class="max-w-md">
-          <h1 class="text-5xl font-bold mb-3">Gestor de institutos</h1>
-          <p class="mb-3">
+          <h1 class="text-5xl font-bold mb-7">Gestor de institutos</h1>
+          <p class="mb-2">
             Gestiona tu instituto y obtén acceso a varias utilidades.
           </p>
           <p>
@@ -52,11 +49,6 @@ const showLogin = ref(false);
         </div>
       </div>
     </div>
-
-    <!-- Modal -->
-    <Modal :show="showLogin" @close="showLogin=false">
-      <LoginModal @close="showLogin=false"/>
-    </Modal>
   </Layout>
 </template>
 

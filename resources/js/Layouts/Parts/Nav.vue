@@ -8,7 +8,7 @@ import Modal from "@/Components/Modal.vue";
 const user = computed(() => usePage().props.auth.user);
 
 // Modal
-const emit = defineEmits(['openLogin']);
+const emit = defineEmits(['openLogin', 'openRegister']);
 
 </script>
 
@@ -54,7 +54,7 @@ const emit = defineEmits(['openLogin']);
       </div>
       <div v-else class="ml-3 gap-2 flex flex-none">
         <button href="/login" class="btn btn-primary" @click="emit('openLogin')">Iniciar Sesión</button>
-        <Link href="/register" class="btn btn-secondary">Registrate</Link>
+        <button href="/register" class="btn btn-secondary" @click="emit('openRegister')">Registrate</button>
       </div>
     </div>
   </div>
