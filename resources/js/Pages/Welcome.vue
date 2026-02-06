@@ -1,15 +1,22 @@
 <script setup>
 
 import Layout from "@/Layouts/Layout.vue";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import {Link, usePage} from "@inertiajs/vue3";
 import Card from "@/Components/Card.vue";
+import Modal from "@/Components/Modal.vue";
+import LoginModal from "@/Pages/Auth/LoginModal.vue";
 
+// Autenticacion
 const user = computed(() => usePage().props.auth.user);
+
+// Modal
+const showLogin = ref(false);
+
 </script>
 
 <template>
-  <Layout>
+  <Layout @openLogin="showLogin=true">
     <!-- Header -->
     <template #header>
       <span v-if="user">Dashboard</span>
@@ -45,6 +52,11 @@ const user = computed(() => usePage().props.auth.user);
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <Modal :show="showLogin" @close="showLogin=false">
+      <LoginModal @close="showLogin=false"/>
+    </Modal>
   </Layout>
 </template>
 

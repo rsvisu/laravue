@@ -6,12 +6,16 @@ import Footer from "@/Layouts/Parts/Footer.vue";
 import {computed} from "vue";
 
 const user = computed(() => usePage().props.auth.user);
+
+// Modal
+
+const emit = defineEmits(['openLogin']);
 </script>
 
 <template>
   <div class="min-h-screen bg-base-200 flex flex-col">
     <!-- Nav -->
-    <Nav/>
+    <Nav @openLogin="emit('openLogin')" />
 
     <!-- Header -->
     <Header>
