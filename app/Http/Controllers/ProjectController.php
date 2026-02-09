@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Database\Seeders\ProjectSeeder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Inertia\Inertia;
 
@@ -77,12 +78,10 @@ class ProjectController extends Controller
     /**
      * Run the project seeder.
      */
-    public function seed()
+    public function seed(Request $request)
     {
-        Artisan::call('db:seed', [
-            '--class' => ProjectSeeder::class,
-        ]);
-
+        $count = $request->input('count', 10);
+        Project::factory()->count($count)->create();
         return back();
     }
 }

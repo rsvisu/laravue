@@ -44,7 +44,7 @@ const destroy = (id) => {
 
 const seedProjects = () => {
   if (confirm('¿Generar 10 proyectos de prueba?')) {
-    router.post(route("projects.seed"));
+    router.post(route("projects.seed"), { count: 10 });
   }
 }
 
