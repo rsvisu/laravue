@@ -26,7 +26,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Projects
-Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index')->middleware('auth');
+Route::resource('/projects', \App\Http\Controllers\ProjectController::class);
+Route::post('/projects/seed', [\App\Http\Controllers\ProjectController::class, 'seed'])->name('projects.seed');
 
 // Auth
 Route::middleware('auth')->group(function () {

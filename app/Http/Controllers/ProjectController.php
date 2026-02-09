@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Database\Seeders\ProjectSeeder;
+use Illuminate\Support\Facades\Artisan;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -68,6 +70,19 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return back();
+    }
+
+    /**
+     * Run the project seeder.
+     */
+    public function seed()
+    {
+        Artisan::call('db:seed', [
+            '--class' => ProjectSeeder::class,
+        ]);
+
+        return back();
     }
 }
