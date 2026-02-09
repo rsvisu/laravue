@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // Clase
-Route::get('/cronometro', fn() => Inertia::render('Cronometero'));
+Route::get('/crono', fn() => Inertia::render('Cronometero'))->name('cronometro');
 
 // Default
 Route::get('/', function () {
@@ -18,11 +19,16 @@ Route::get('/', function () {
     ]);
 });
 
+// Dashboard
 Route::get('/dashboard', function () {
     return redirect('/');
     // return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Projects
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index')->middleware('auth');
+
+// Auth
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

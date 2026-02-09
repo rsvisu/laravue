@@ -18,23 +18,36 @@ const user = computed(() => usePage().props.auth.user);
     <template #header>
       <span v-if="user">Dashboard</span>
     </template>
+
+    <!-- Autenticado -->
     <div v-if="user">
       <!-- Utilidades -->
       <div class="border-b mb-5 py-3">
         <h2 class="text-lg">Utilidades</h2>
       </div>
-      <div class="grid col-3 gap-6">
+      <div class="grid grid-cols-3 gap-6">
         <Card>
           <template #title>
             Cronometero
           </template>
           Accede al cronometro
           <template #cta>
-            <Link href="cronometro" class="btn btn-primary">Ver</Link>
+            <Link :href="route('cronometro')" class="btn btn-primary">Ver</Link>
+          </template>
+        </Card>
+        <Card>
+          <template #title>
+            Proyectos
+          </template>
+          Accede a los proyectos
+          <template #cta>
+            <Link :href="route('projects.index')" class="btn btn-primary">Ver</Link>
           </template>
         </Card>
       </div>
     </div>
+
+    <!-- Invitado -->
     <div v-else class="hero bg-base-200 flex-1 flex justify-center items-center min-h-[70vh]">
       <!-- Hero -->
       <div class="hero-content text-center">
