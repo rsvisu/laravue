@@ -1,5 +1,5 @@
 <script setup>
-import {useForm, usePage} from "@inertiajs/vue3";
+import {useForm} from "@inertiajs/vue3";
 
 const props = defineProps({project: Object});
 
@@ -12,7 +12,7 @@ const form = useForm({
 
 const submit = () => {
   if (props.project) {
-    form.put(route("projects.update"), props.project.id);
+    form.put(route("projects.update", props.project.id));
   } else {
     form.post(route('projects.store'));
   }
