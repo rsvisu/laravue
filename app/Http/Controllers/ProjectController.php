@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Project\SeedProjectRequest;
+use App\Http\Requests\Project\StoreProjectRequest;
+use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Models\Project;
-use App\Http\Requests\StoreProjectRequest;
-use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -37,7 +38,8 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        Project::create($request->validated());
+        return redirect(route('projects.index'));
     }
 
     /**
@@ -63,7 +65,8 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->update($request->validated());
+        return redirect(route('projects.index'));
     }
 
     /**
@@ -78,9 +81,9 @@ class ProjectController extends Controller
     /**
      * Run the project seeder.
      */
-    public function seed(Request $request)
+    public function seed(SeedProjectRequest $request)
     {
-        $count = $request->input('count', 10);
+        $count = $request->validated('count', 10);
         Project::factory()->count($count)->create();
         return back();
     }
