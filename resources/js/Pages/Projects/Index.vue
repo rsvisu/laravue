@@ -44,8 +44,16 @@ const destroy = (id) => {
 
 const seedProjects = () => {
   if (confirm('¿Generar 10 proyectos de prueba?')) {
-    router.post(route("projects.seed"), { count: 10 });
+    router.post(route("projects.seed"), {count: 10});
   }
+}
+
+const add = () => {
+  router.get(route("projects.create"));
+}
+
+const edit = (id) => {
+  router.get(route("projects.edit", id));
 }
 
 </script>
@@ -56,12 +64,20 @@ const seedProjects = () => {
     <template #header>
       <div class="flex items-center justify-between w-full">
         <span>Proyectos</span>
-        <button
-          class="btn btn-sm btn-success"
-          @click="seedProjects"
-        >
-          Generar Proyectos
-        </button>
+        <div class="flex gap-2">
+          <button
+              class="btn btn-sm btn-success"
+              @click="seedProjects"
+          >
+            Generar Proyectos
+          </button>
+          <button
+              class="btn btn-sm btn-primary"
+              @click="add"
+          >
+            Añadir Proyecto
+          </button>
+        </div>
       </div>
     </template>
     <!-- Body -->
@@ -89,7 +105,7 @@ const seedProjects = () => {
           </td>
           <td>
             <div class="flex gap-2">
-              <button class="btn btn-sm btn-primary">Editar</button>
+              <button class="btn btn-sm btn-primary" @click="edit(project.id)">Editar</button>
               <button class="btn btn-sm btn-error" @click="destroy(project.id)">Borrar</button>
             </div>
           </td>
