@@ -6,34 +6,33 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Clase
-Route::get('/crono', fn() => Inertia::render('Cronometero'))->name('cronometro');
-
-// Default
+// Home
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    // Si esta autenticado devolvemos esta vista
+    if (auth()->check()) {
+        return Inertia::render('WelcomeAuth');
+
+    }
+    // Si no, esta otra
+    return Inertia::render('WelcomeGuest');
 });
-
-// Dashboard
-Route::get('/dashboard', function () {
-    return redirect('/');
-    // return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-// Projects
-Route::resource('/projects', \App\Http\Controllers\ProjectController::class);
-Route::post('/projects/seed', [\App\Http\Controllers\ProjectController::class, 'seed'])->name('projects.seed');
 
 // Auth
 Route::middleware('auth')->group(function () {
+    // Cronometro
+    Route::get('/crono', fn() => Inertia::render('Cronometero'))->name('cronometro');
+    // Proyectos
+    Route::resource('/projects', ProjectController::class);
+    Route::post('/projects/seed', [ProjectController::class, 'seed'])->name('projects.seed');
+    // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Dashboard
+    Route::get('/dashboard', function () {
+        return redirect('/');
+        // return Inertia::render('Dashboard');
+    })->name('dashboard');
 });
 
 require __DIR__.'/auth.php';

@@ -7,20 +7,14 @@ import Card from "@/Components/Card.vue";
 import Modal from "@/Components/Modal.vue";
 import LoginModal from "@/Pages/Auth/LoginModal.vue";
 
-// Autenticacion
-const user = computed(() => usePage().props.auth.user);
-
 </script>
 
 <template>
   <Layout>
     <!-- Header -->
     <template #header>
-      <span v-if="user">Dashboard</span>
+      <span>Dashboard</span>
     </template>
-
-    <!-- Autenticado -->
-    <div v-if="user">
       <!-- Utilidades -->
       <div class="border-b mb-5 py-3">
         <h2 class="text-lg">Utilidades</h2>
@@ -45,23 +39,6 @@ const user = computed(() => usePage().props.auth.user);
           </template>
         </Card>
       </div>
-    </div>
-
-    <!-- Invitado -->
-    <div v-else class="hero bg-base-200 flex-1 flex justify-center items-center min-h-[70vh]">
-      <!-- Hero -->
-      <div class="hero-content text-center">
-        <div class="max-w-md">
-          <h1 class="text-5xl font-bold mb-7">Gestor de institutos</h1>
-          <p class="mb-2">
-            Gestiona tu instituto y obtén acceso a varias utilidades.
-          </p>
-          <p>
-            Inicia sesión o registrate arriba.
-          </p>
-        </div>
-      </div>
-    </div>
   </Layout>
 </template>
 
