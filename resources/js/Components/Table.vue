@@ -56,11 +56,16 @@ const edit = (id) => {
 
 <template>
   <div class="overflow-x-auto w-full">
-    <div class="flex align-cente justify-end my-2">
-      <button class="btn btn-sm btn-accent" @click="add">
-        {{ props.texts.add }}
-      </button>
+    <div class="flex align-center justify-end mb-4">
+      <!-- Actions -->
+      <div class="flex gap-2">
+        <slot name="extraActions"/>
+        <button class="btn btn-sm btn-soft btn-primary" @click="add">
+          {{ props.texts.add }}
+        </button>
+      </div>
     </div>
+    <!-- Table -->
     <table class="table table-pin-rows table-pin-cols">
       <thead>
       <tr>

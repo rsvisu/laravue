@@ -19,7 +19,8 @@ class ProjectController extends Controller
         $projects = Project::all();
         $tableConfig = config('tables.projects');
 
-        return Inertia::render('Projects/Index',compact('projects', 'tableConfig'));
+        return Inertia::render('Projects/Index',
+            compact('projects', 'tableConfig'));
     }
 
     /**
