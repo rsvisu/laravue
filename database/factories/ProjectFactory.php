@@ -20,10 +20,10 @@ class ProjectFactory extends Factory
         $name = array_rand($projects,1);
         return [
             'name' => $name,
+            'user_id' => 1,
             'hours' => $this->faker->randomDigit(),
             'description' => $projects[$name],
             'starting_date' => $this->faker->date(),
-            //
         ];
     }
 }

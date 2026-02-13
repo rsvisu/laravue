@@ -16,7 +16,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $user_id = auth()->id();
+
+        $projects = Project::where('user_id', $user_id)->get();
         $tableConfig = config('tables.projects');
 
         return Inertia::render('Projects/Index',
@@ -36,7 +38,10 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        Project::create($request->validated());
+        $project = new Project($request->validated());
+        $project->user_id = auth()->id();
+        $project->save();
+
         return redirect(route('projects.index'));
     }
 
@@ -82,7 +87,9 @@ class ProjectController extends Controller
     public function seed(SeedProjectRequest $request)
     {
         $count = $request->validated('count', 10);
-        Project::factory()->count($count)->create();
+        Project::factory()->count($count)->create([
+            'user_id' => auth()->id(),
+        ]);
         return back();
     }
 }
