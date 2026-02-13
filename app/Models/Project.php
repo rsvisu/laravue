@@ -11,13 +11,4 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description', 'hours', 'starting_date'];
-
-    public static function fieldLabel() {
-        return [
-          "name" => "Nombre",
-          'description' => 'Descripción',
-          'hours' => 'Horas',
-          'starting_date' => 'Fecha de inicio'
-        ];
-    }
 }
