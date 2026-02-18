@@ -15,11 +15,15 @@ import LoginModal from "@/Pages/Auth/LoginModal.vue";
     <template #header>
       <span>Dashboard</span>
     </template>
-      <!-- Utilidades -->
-      <div class="border-b mb-5 py-3">
-        <h2 class="text-lg">Utilidades</h2>
-      </div>
-      <div class="grid grid-cols-3 gap-6">
+
+    <!-- Cuerpo -->
+      <div class="grid grid-cols-3 gap-6 mb-20">
+
+        <!-- Utilidades -->
+        <div class="border-b mb-5 py-3 col-span-full">
+          <h2 class="text-lg">Utilidades</h2>
+        </div>
+
         <Card>
           <template #title>
             Cronometero
@@ -36,6 +40,39 @@ import LoginModal from "@/Pages/Auth/LoginModal.vue";
           Accede a los proyectos
           <template #cta>
             <Link :href="route('projects.index')" class="btn btn-primary">Ver</Link>
+          </template>
+        </Card>
+
+        <!-- Usuarios -->
+        <div class="border-b mb-5 py-3 col-span-full">
+          <h2 class="text-lg">Usuarios</h2>
+        </div>
+
+        <Card>
+          <template #title>
+            Todos
+          </template>
+          Visualiza a todos los usuarios
+          <template #cta>
+            <Link :href="route('users.index')" class="btn btn-primary">Ver</Link>
+          </template>
+        </Card>
+        <Card>
+          <template #title>
+            Profesores
+          </template>
+          Visualiza a todos los profesores
+          <template #cta>
+            <Link :href="route('users.indexByRole', 'teacher')" class="btn btn-primary">Ver</Link>
+          </template>
+        </Card>
+        <Card>
+          <template #title>
+            Estudiantes
+          </template>
+          Visualiza a todos los estudiantes
+          <template #cta>
+            <Link :href="route('users.indexByRole', 'student')" class="btn btn-primary">Ver</Link>
           </template>
         </Card>
       </div>

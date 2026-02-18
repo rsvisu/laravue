@@ -8,10 +8,18 @@ const props = defineProps({
   tableConfig: Object
 });
 
-const seedProjects = () => {
-  if (confirm('¿Generar 10 proyectos de prueba?')) {
-    router.post(route("projects.seed"), {count: 10});
+const seedUsers = () => {
+  if (confirm('¿Generar usuarios de prueba?')) {
+    router.post(route("users.seed"), {count: 5});
   }
+}
+
+// Alerta
+const params = new URLSearchParams(window.location.search);
+const error = params.get("error");
+
+if (error) {
+  alert(error);
 }
 
 </script>
@@ -20,13 +28,13 @@ const seedProjects = () => {
   <Layout>
     <!-- Header -->
     <template #header>
-        <span>Proyectos</span>
+        <span>Usuarios</span>
     </template>
     <!-- Body -->
     <Table :rows="rows" :fields="tableConfig.fields" :routes="tableConfig.routes" :texts="tableConfig.texts">
       <template #extraActions>
-        <button class="btn btn-sm btn-soft btn-primary" @click="seedProjects">
-          Generar proyectos
+        <button class="btn btn-sm btn-soft btn-primary" @click="seedUsers">
+          Generar usuarios
         </button>
       </template>
     </Table>

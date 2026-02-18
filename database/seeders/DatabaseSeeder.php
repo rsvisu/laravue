@@ -15,11 +15,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'id' => 1,
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('Admin1234')
+        // Seeders para producción y local
+        $this::call([
+            RolesSeeder::class,
         ]);
+
+        // Seeders para local
+        if (app()->environment('local')) {
+            User::factory()->create([
+                'id' => 1,
+                'name' => 'Admin',
+                'email' => 'admin@example.com',
+                'password' => bcrypt('Admin1234')
+            ])->assignRole('admin');
+        }
     }
 }
+

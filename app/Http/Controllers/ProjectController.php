@@ -21,8 +21,10 @@ class ProjectController extends Controller
         $projects = Project::where('user_id', $user_id)->get();
         $tableConfig = config('tables.projects');
 
-        return Inertia::render('Projects/Index',
-            compact('projects', 'tableConfig'));
+        return Inertia::render('Projects/Index', [
+            'rows' => $projects,
+            'tableConfig' => $tableConfig
+        ]);
     }
 
     /**
@@ -82,7 +84,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Run the project seeder.
+     * Seed projects.
      */
     public function seed(SeedProjectRequest $request)
     {
